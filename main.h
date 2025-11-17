@@ -1,6 +1,13 @@
-#ifndef MAIN_h
-#define MAIN_h
+#ifndef MAIN_H
+#define MAIN_H
 
 int _printf(const char *format, ...);
 
-#endif
+int char_printing(va_list args);
+int string_printing(va_list args);
+int int_printing(va_list args);
+int percent_printing(void);
+
+int _putchar(char c);
+
+#endif/*MAIN_H*/
