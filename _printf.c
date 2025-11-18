@@ -1,4 +1,23 @@
 #include "main.h"
+/**
+ * _printf - Custom implementation of the standard printf function.
+ * @format: String containing zero or more format specifiers.
+ *
+ * Description:
+ * Parses the format string and handles supported conversion
+ * specifiers. For each valid specifier, the corresponding argument
+ * is fetched from the variadic argument list and printed.
+ *
+ * Supported specifiers:
+ *   %d, %i  - Print integer values
+ *   %c      - Print a character
+ *   %s      - Print a string
+ *   %%      - Print a literal percent sign
+ *
+ * Return:
+ * Total number of characters printed.
+ * Returns -1 if the format string is NULL.
+ */
 int _printf(const char *format, ...)
 {
 va_list args;
