@@ -10,5 +10,6 @@ int string_printing(va_list args);
 int int_printing(va_list args);
 int percent_printing(void);
 int _putchar(char c);
-
+int print_number(unsigned int num);
+int print_int(va_list args);
 #endif/*MAIN_H*/
