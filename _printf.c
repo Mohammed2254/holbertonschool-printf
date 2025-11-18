@@ -32,6 +32,10 @@ if (format[i] == '%')
 i++;
 if (format[i] == 'd' || format[i] == 'i')
 count += print_int(args);
+else if(format[i] == 'c') /* if the format is 'c'(charater)*/
+count  += char_printing(args);
+else if (format[i] == '%') /* if the format was '%' (percent)*/
+count += percent_printing();
 else
 count += _putchar(format[i]);
 }
