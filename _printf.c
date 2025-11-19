@@ -20,31 +20,35 @@
  */
 int _printf(const char *format, ...)
 {
-va_list args;
-int i = 0, count = 0;
-if (format == NULL)
-return (-1);
+	va_list args;
+	int i = 0, count = 0;
+		if (format == NULL)
+			return (-1);
 va_start(args, format);
-while (format[i])
-{
-if (format[i] == '%')
-{
-i++;
-if (format[i] == 'd' || format[i] == 'i')
-count += print_int(args);
-else if(format[i] == 'c') /* if the format is 'c'(charater)*/
-count  += char_printing(args);
-else if (format[i] == '%') /* if the format was '%' (percent)*/
-count += percent_printing();
-else
-count += _putchar(format[i]);
-}
-else
-{
-count += _putchar(format[i]);
-}
-i++;
-}
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '\0')
+				return (-1);
+	i++;
+		if (format[i] == 'd' || format[i] == 'i')
+			count += print_int(args);
+		else if (format[i] == 'c') /* if the format is 'c'(charater)*/
+			count  += char_printing(args);
+		else if (format[i] == '%') /* if the format was '%' (percent)*/
+			count += percent_printing();
+		else if (format[i] == 's')
+			count += string_printing(args);
+		else
+			count += _putchar(format[i]);
+		}
+		else
+		{
+			count += _putchar(format[i]);
+		}
+	i++;
+	}
 va_end(args);
 return (count);
 }
