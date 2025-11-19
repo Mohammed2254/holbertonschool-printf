@@ -1,3 +1,10 @@
+.SH SYNOPSIS
+.nf
+#include "main.h"
+
+int _printf(const char *format, ...);
+.fi
+
 .SH DESCRIPTION
 The _printf function is a lightweight, custom version of the standard C printf. It takes a format string, looks through it character by character, and prints everything to standard output. Regular characters get written directly, but whenever it runs into a %, it knows a special instruction is coming next.
 
@@ -26,9 +33,10 @@ If the format string is NULL, or if a percent sign appears at the end of the
 format string without a valid specifier, the function returns -1. Otherwise, 
 it returns the total number of characters printed.
 
-
-
-
+.SH RETURN VALUE
+Upon successful completion, _printf() returns the number of characters printed
+(excluding the terminating null byte used to end output to strings).
+If an output error is encountered, the function returns \-1.
 
 .SH EXAMPLES
 1. Printing a string:
