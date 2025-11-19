@@ -1,15 +1,43 @@
-# _printf
+# `_printf` – Custom Implementation of `printf`
 
-A re-creation of the C standard library's `printf` function.  
-This project implements a custom `_printf` that supports format specifiers, variable arguments, and output formatting identical to the original `printf`, following the specifications outlined by Holberton School.
+A custom re-implementation of the C standard library function `printf`, developed as part of the low-level programming curriculum at Holberton School.  
+This project demonstrates a deep understanding of variadic functions, format specifiers, memory management, and system-level output using the `write` system call.
 
-## Supported Format Specifiers
+---
 
-- `%%` : Prints a literal percent sign (`%`)
-- `%c` : Prints a single character
-- `%s` : Prints a string
-- `%d` / `%i` : Prints an integer (coming soon / implemented)
+## ✨ Features
 
-## Usage
+- Fully compatible with standard `printf` behavior for supported specifiers.
+- Built using only allowed system calls (`write`) and standard C (ISO C90 compliant).
+- Supports variable arguments via `<stdarg.h>`.
+- Modular and well-documented codebase, designed for clarity and maintainability.
 
-Include the header file and call `_printf` like the standard `printf`:
+---
+
+## 🔤 Supported Format Specifiers
+
+| Specifier | Description                        |
+|-----------|------------------------------------|
+| `%%`      | Prints a literal `%` character     |
+| `%c`      | Prints a single character          |
+| `%s`      | Prints a null-terminated string    |
+| `%d` / `%i` | Prints a signed decimal integer *(implemented)* |
+
+> **Note**: Additional format specifiers (e.g., `%u`, `%x`, `%p`, field widths, flags) may be added in future extensions.
+
+---
+
+## 🚀 Usage
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Mohammed2254/holbertonschool-printf.git
+   cd printf
+
+## 📝 Contributors
+
+The following students contributed to the design, implementation, and testing of this project:
+
+- Mohammed Abdullah Alabdali  
+- Reem Abdulhadi Alshehri  
+- Abdullah Manahi Almouraibd
