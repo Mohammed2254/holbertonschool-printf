@@ -1,14 +1,8 @@
 .SH DESCRIPTION
-The _printf function is a simplified, custom implementation of the standard 
-C library printf function. It processes a format string containing ordinary 
-characters and conversion specifiers, and prints the corresponding output to 
-the standard output (stdout).
+The _printf function is a lightweight, custom version of the standard C printf. It takes a format string, looks through it character by character, and prints everything to standard output. Regular characters get written directly, but whenever it runs into a %, it knows a special instruction is coming next.
 
-Ordinary characters in the format string are written directly to the output. 
-When a percent sign (%) is encountered, the function interprets the next 
-character as a conversion specifier and handles it accordingly. The function 
-retrieves the corresponding argument from the variadic argument list and 
-prints it using helper functions.
+After the %, the next character tells _printf what kind of value it should print and which argument to pull from the variadic list. Depending on the specifier, it calls helper functions to handle the actual printing.
+
 
 The following conversion specifiers are supported:
 
