@@ -7,5 +7,5 @@
  */
 int percent_printing(void)
 {
-    return write(1, "%", 1);
+return (write(1, "%", 1));
 }
