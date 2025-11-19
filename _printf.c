@@ -41,7 +41,10 @@ va_start(args, format);
 		else if (format[i] == 's')
 			count += string_printing(args);
 		else
+		{
+			count += _putchar('%');
 			count += _putchar(format[i]);
+		}
 		}
 		else
 		{
