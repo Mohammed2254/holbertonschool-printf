@@ -1,0 +1,83 @@
+.SH DESCRIPTION
+The _printf function is a simplified, custom implementation of the standard 
+C library printf function. It processes a format string containing ordinary 
+characters and conversion specifiers, and prints the corresponding output to 
+the standard output (stdout).
+
+Ordinary characters in the format string are written directly to the output. 
+When a percent sign (%) is encountered, the function interprets the next 
+character as a conversion specifier and handles it accordingly. The function 
+retrieves the corresponding argument from the variadic argument list and 
+prints it using helper functions.
+
+The following conversion specifiers are supported:
+
+.TP
+.B %d, %i
+Print a signed decimal integer.
+
+.TP
+.B %c
+Print a single character.
+
+.TP
+.B %s
+Print a null-terminated string.
+
+.TP
+.B %%
+Print a literal percent sign.
+
+If the format string is NULL, or if a percent sign appears at the end of the 
+format string without a valid specifier, the function returns -1. Otherwise, 
+it returns the total number of characters printed.
+
+
+
+
+
+.SH EXAMPLES
+1. Printing a string:
+.br
+.B _printf("Hello, %s!\\n", "Everyone!");
+.br
+Output:
+.br
+Hello, Everyone!
+
+.PP
+2. Printing an integer:
+.br
+.B _printf("Score: %d\\n", 98);
+.br
+Output:
+.br
+Score: 98
+
+.PP
+3. Printing a character:
+.br
+.B _printf("Grade: %c\\n", 'A');
+.br
+Output:
+.br
+Grade: A
+
+.PP
+4. Printing a percent sign:
+.br
+.B _printf("Completion: 100%%\\n");
+.br
+Output:
+.br
+Completion: 100%
+
+.PP
+5. Mixing different types:
+.br
+.B _printf("Name: %s, Age: %d, Initial: %c\\n", "Reem", 21, 'R');
+.br
+Output:
+.br
+Name: Reem, Age: 21, Initial: R
+
