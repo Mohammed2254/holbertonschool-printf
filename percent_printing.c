@@ -7,6 +7,5 @@
  */
 int percent_printing(void)
 {
-_putchar("%");
-return (1);
+return (write(1, "%", 1));
 }
