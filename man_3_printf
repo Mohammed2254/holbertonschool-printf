@@ -1,3 +1,8 @@
+.TH _PRINTF 3 "November 2025" "Holberton School" "_printf manual"
+
+.SH NAME
+_printf - custom implementation of printf function
+
 .SH SYNOPSIS
 .nf
 #include "main.h"
@@ -6,12 +11,14 @@ int _printf(const char *format, ...);
 .fi
 
 .SH DESCRIPTION
-The _printf function is a lightweight, custom version of the standard C printf. It takes a format string, looks through it character by character, and prints everything to standard output. Regular characters get written directly, but whenever it runs into a %, it knows a special instruction is coming next.
+The _printf function is a lightweight, custom version of the standard C printf. It takes a format string, looks through it character by character, and prints everything to standard output. Regular characters get written directly, but whenever it runs into a %, the next character determines the conversion type and the function prints the corresponding argument.
 
 After the %, the next character tells _printf what kind of value it should print and which argument to pull from the variadic list. Depending on the specifier, it calls helper functions to handle the actual printing.
 
+This implementation does not support flags, field width, precision, 
+or length modifiers.
 
-The following conversion specifiers are supported:
+.SH FORMAT SPECIFIERS
 
 .TP
 .B %d, %i
@@ -29,14 +36,22 @@ Print a null-terminated string.
 .B %%
 Print a literal percent sign.
 
-If the format string is NULL, or if a percent sign appears at the end of the 
-format string without a valid specifier, the function returns -1. Otherwise, 
-it returns the total number of characters printed.
-
 .SH RETURN VALUE
 Upon successful completion, _printf() returns the number of characters printed
 (excluding the terminating null byte used to end output to strings).
 If an output error is encountered, the function returns \-1.
+
+.SH ERRORS
+The _printf function returns -1 in the following cases:
+
+.TP
+.B
+If the format string is NULL.
+
+.TP
+.B
+If a percent sign ('%') appears at the end of the format string
+without a valid conversion specifier.
 
 .SH EXAMPLES
 1. Printing a string:
@@ -83,3 +98,5 @@ Output:
 .br
 Name: Reem, Age: 21, Initial: R
 
+.SH AUTHORS
+Written by Mohammed Abdullah Alabdali,Reem Abdulhadi Alshehri and Abdullah Manahi Almouraibd
