@@ -53,6 +53,9 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 
 > All printing is done using `write(1, ...)` to ensure compliance with Holberton’s low-level restrictions.
 
+## 💾 Flowchart for _printf Implementation
+
+```mermaid
 graph TD
     A((Start _printf)) --> B[i = 0, count = 0];
     
