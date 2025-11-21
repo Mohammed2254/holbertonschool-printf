@@ -71,11 +71,11 @@ To use `_printf` in your program:
 1. Include the header:
    ```c
    #include "main.h"
-int main(void)
-{
+   int main(void)
+   {
     _printf("Hello %s! You are %d years old.\n", "Ali", 25);
     return 0;
-}
+   }
 ---
 
 ## 📝 Contributors
