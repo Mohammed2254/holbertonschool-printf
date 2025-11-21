@@ -46,7 +46,7 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 - **Helper functions** (defined in separate `.c` files, not shown here but assumed):
   - `char_printing()` – handles `%c`
   - `string_printing()` – handles `%s`
-  - `print_int() – handles integer printing logi`
+  - `print_int()` – handles integer printing loic
   - `print_number() – recursively prints integer digit.`
   - `percent_printing()` – handles `%%`
   - `_putchar()` – wrapper around `write()` for single-character output
