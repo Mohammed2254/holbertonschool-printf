@@ -14,14 +14,14 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 | `string_printing.c`   | Implements `%s` – prints a null-terminated string.                               |
 | `int_printing.c`      | Implements `%d` and `%i` – prints signed integers.                               |
 | `percent_printing.c`  | Implements `%%` – prints a literal `%`.                                          |
-| `helpingFunc.c`       | Utility functions: `_putchar` (uses `write`) and `print_number`          (integer-to-string converter). |    
+| `helpingFunc.c`       | Utility functions: _putchar (write wrapper) and print_number (recursively prints integers).. |    
 
 ## ✨ Features
 
-- Fully compatible with standard `printf` behavior for all **supported specifiers**.
+- Matches the behavior of standard printf for the supported specifiers in most common cases.
 - Built **without** standard I/O functions (`printf`, `puts`, etc.); uses only the `write` system call.
 - Implements **variadic arguments** via `<stdarg.h>`.
-- Modular, readable, and well-documented source code.
+- The project is structured into small, focused source files for clarity.
 - Returns the **total number of characters printed**, or `-1` on error (e.g., `NULL` format string).
 
 ---
@@ -46,7 +46,8 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 - **Helper functions** (defined in separate `.c` files, not shown here but assumed):
   - `char_printing()` – handles `%c`
   - `string_printing()` – handles `%s`
-  - `print_int()` & `print_number()` – handle `%d`/`%i`
+  - `print_int() – handles integer printing logic
+  - `print_number() – recursively prints integer digit.`
   - `percent_printing()` – handles `%%`
   - `_putchar()` – wrapper around `write()` for single-character output
 
