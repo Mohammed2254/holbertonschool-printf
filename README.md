@@ -55,42 +55,53 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 
 
 ## 🔵 Flowchart of _printf Function (Text Representation)
+graph TD
+    A[Start: _printf(format, ...)] --> B{format == NULL?};
 
-Start  
-│  
-├── Is format NULL?  
-│       ├── Yes → Return -1  
-│       └── No  
-│  
-├── Initialize va_list args  
-├── Initialize count = 0, i = 0  
-│  
-├── Does format[i] exist?  
-│       ├── No → End va_list → Return count  
-│       └── Yes  
-│  
-├── Is format[i] '%' ?  
-│       ├── No → print format[i], update count → i++ → Loop  
-│       └── Yes  
-│  
-├── Does format[i + 1] exist?  
-│       ├── No → Invalid specifier → print '%', update count → i++  
-│       └── Yes  
-│  
-├── Is format[i + 1] a valid specifier? (c, s, d, i)  
-│       ├── Yes  
-│       │       ├── Handle %c → update count  
-│       │       ├── Handle %s → update count  
-│       │       ├── Handle %d / %i → update count  
-│       │       └── i += 2  
-│       └── No  
-│               ├── Invalid specifier → print '%' + format[i+1]  
-│               ├── Update count  
-│               └── i += 2  
-│  
-└── Loop until format string ends  
+    B -- Yes --> C[Return -1];
+    B -- No --> D[int i = 0, count = 0];
 
----
+    D --> E[va_start(args, format)];
+
+    E --> F{format[i] != '\0'?};
+
+    F -- No --> J[va_end(args)];
+    J --> K[Return count];
+
+    F -- Yes --> G{format[i] == '%'};
+
+    G -- No --> H[count += _putchar(format[i])];
+    H --> I[i++];
+    I --> F;
+
+    G -- Yes --> L{format[i + 1] == '\0'};
+
+    L -- Yes --> C;
+
+    L -- No --> M[i++ (Skip '%')];
+
+    M --> N{format[i] == 'd' or 'i'};
+
+    N -- Yes --> O[count += print_int(args)];
+    N -- No --> P{format[i] == 'c'};
+
+    O --> I;
+    
+    P -- Yes --> Q[count += char_printing(args)];
+    P -- No --> R{format[i] == '%'};
+    
+    Q --> I;
+    
+    R -- Yes --> S[count += percent_printing()];
+    R -- No --> T{format[i] == 's'};
+    
+    S --> I;
+    
+    T -- Yes --> U[count += string_printing(args)];
+    T -- No --> V[count += _putchar('%'); count += _putchar(format[i])];
+    
+    U --> I;
+    V --> I;
 
 ## 🚀 Usage
 
