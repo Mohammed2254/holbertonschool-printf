@@ -1,124 +1,82 @@
 # `_printf` – Custom Implementation of `printf`
 
-A custom re-implementation of the C standard library function `printf`, developed as part of the low-level programming curriculum at Holberton School.  
-This project demonstrates a deep understanding of variadic functions, format specifiers, memory management, and system-level output using the `write` system call.
+A custom re-implementation of the C standard library function `printf`, developed as part of the low-level programming curriculum at **Holberton School**.  
+This project demonstrates a deep understanding of **variadic functions**, **format specifiers**, **manual output handling**, and system-level I/O using the `write` system call — all within **ISO C90** compliance.
 
 ---
+## 📁 Project Files
+
+| File                  | Purpose                                                                          |
+|-----------------------|----------------------------------------------------------------------------------|
+| `main.h`              | Header file with function prototypes and includes (`<unistd.h>`, `<stdarg.h>`).  |
+| `_printf.c`           | Core function that parses the format string and dispatches specifiers.           |
+| `char_printing.c`     | Implements `%c` – prints a single character.                                     |
+| `string_printing.c`   | Implements `%s` – prints a null-terminated string.                               |
+| `int_printing.c`      | Implements `%d` and `%i` – prints signed integers.                               |
+| `percent_printing.c`  | Implements `%%` – prints a literal `%`.                                          |
+| `helpingFunc.c`       | Utility functions: `_putchar` (uses `write`) and `print_number`          (integer-to-string converter). |    
 
 ## ✨ Features
 
-- Fully compatible with standard `printf` behavior for supported specifiers.
-- Built using only allowed system calls (`write`) and standard C (ISO C90 compliant).
-- Supports variable arguments via `<stdarg.h>`.
-- Modular and well-documented codebase, designed for clarity and maintainability.
+- Fully compatible with standard `printf` behavior for all **supported specifiers**.
+- Built **without** standard I/O functions (`printf`, `puts`, etc.); uses only the `write` system call.
+- Implements **variadic arguments** via `<stdarg.h>`.
+- Modular, readable, and well-documented source code.
+- Returns the **total number of characters printed**, or `-1` on error (e.g., `NULL` format string).
 
 ---
 
 ## 🔤 Supported Format Specifiers
 
-| Specifier | Description                        |
-|-----------|------------------------------------|
-| `%%`      | Prints a literal `%` character     |
-| `%c`      | Prints a single character          |
-| `%s`      | Prints a null-terminated string    |
-| `%d` / `%i` | Prints a signed decimal integer *(implemented)* |
+| Specifier      | Description                      |
+|----------------|----------------------------------|
+| `%%`           | Prints a literal `%` character   |
+| `%c`           | Prints a single character        |
+| `%s`           | Prints a null-terminated string  |
+| `%d` / `%i`    | Prints a signed decimal integer  |
 
-> **Note**: Additional format specifiers (e.g., `%u`, `%x`, `%p`, field widths, flags) may be added in future extensions.
-
----
-## Flow chart
-
-                            ┌──────────────────────┐
-                            │   Call _printf()     │
-                            │ with format string   │
-                            │ and variable args    │
-                            └──────────┬───────────┘
-                                       ▼
-                    ┌─────────────────────────────────────┐
-                    │ Initialize:                         │
-                    │ - va_list args                      │
-                    │ - char count = 0                    │
-                    │ - parse format string character by  │
-                    │   character                         │
-                    └──────────────────┬──────────────────┘
-                                       ▼
-                      ┌──────────────────────────────────┐
-                      │ Is current char == '%' ?         │
-                      └──────────────────┬───────────────┘
-                                No       │       Yes
-                                 ▼       ▼
-                ┌─────────────────────┐  ┌───────────────────────┐
-                │ Write char via      │  │ Look at next char     │
-                │ write()             │  │ (specifier)           │
-                └─────────┬───────────┘  └───────────┬───────────┘
-                          │                          ▼
-                          │        ┌──────────────────────────────────┐
-                          │        │ Which specifier?                 │
-                          │        └────────────────┬─────────────────┘
-                          │                         │
-                          │          ┌──────────────┴───────────────┐
-                          │          ▼              ▼               ▼
-                          │   ┌─────────────┐ ┌────────────┐ ┌────────────┐
-                          │   │ "%%"        │ │ "%c"       │ │ "%s"       │
-                          │   │ → print '%' │ │ → print    │ │ → print    │
-                          │   └─────┬───────┘ │   char     │ │   string   │
-                          │         │         └─────┬──────┘ └─────┬──────┘
-                          │         │               │              │
-                          │         ▼               ▼              ▼
-                          │   ┌─────────────┐ ┌────────────┐ ┌────────────┐
-                          │   │ write('%')  │ │ write(c)   │ │ write(s)   │
-                          │   └─────┬───────┘ └─────┬──────┘ └─────┬──────┘
-                          │         │               │              │
-                          │         └───────┬───────┴──────┬───────┘
-                          │                 ▼              ▼
-                          │        ┌──────────────────────────────────┐
-                          │        │   "%d" or "%i" ?                 │
-                          │        └────────────────┬─────────────────┘
-                          │                         │
-                          │              ┌──────────┴──────────┐
-                          │              ▼                     ▼
-                          │   ┌────────────────────┐  ┌────────────────────┐
-                          │   │ Convert int to     │  │ (Other specifiers  │
-                          │   │ string (e.g.,      │  │  not supported →   │
-                          │   │  using _itoa)      │  │  ignore or error)  │
-                          │   └─────────┬──────────┘  └────────────────────┘
-                          │             ▼
-                          │   ┌────────────────────┐
-                          │   │ write(converted    │
-                          │   │ number string)     │
-                          │   └─────────┬──────────┘
-                          │             │
-                          └─────────────┴─────────────┐
-                                        ▼
-                     ┌──────────────────────────────────────┐
-                     │ Increment char count by number of    │
-                     │ bytes written                        │
-                     └───────────────────┬──────────────────┘
-                                         ▼
-                   ┌───────────────────────────────────────────┐
-                   │ Move to next character in format string │
-                   └───────────────────┬───────────────────────┘
-                                       ▼
-                     ┌──────────────────────────────────────┐
-                     │ End of format string?                │
-                     └──────────────────┬───────────────────┘
-                                No      │       Yes
-                                 ▼      ▼
-                                 └──────┴─────────►
-                                               ▼
-                                    ┌──────────────────────┐
-                                    │ Return total char    │
-                                    │ count (or -1 on err) │
-                                    └──────────────────────┘
-
+> **Note**: Additional specifiers (e.g., `%u`, `%x`, `%p`, flags, width/precision) are **not implemented** in this version but may be added in future extensions.
 
 ---
+
+## 🧠 Project Structure Overview
+
+- **`main.h`**: Header file containing function prototypes and necessary includes (`<unistd.h>`, `<stdarg.h>`).
+- **`_printf.c`**: Core implementation of `_printf`, which parses the format string and delegates printing tasks.
+- **Helper functions** (defined in separate `.c` files, not shown here but assumed):
+  - `char_printing()` – handles `%c`
+  - `string_printing()` – handles `%s`
+  - `print_int()` & `print_number()` – handle `%d`/`%i`
+  - `percent_printing()` – handles `%%`
+  - `_putchar()` – wrapper around `write()` for single-character output
+
+> All printing is done using `write(1, ...)` to ensure compliance with Holberton’s low-level restrictions.
+
+---
+
 ## 🚀 Usage
 
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Mohammed2254/holbertonschool-printf.git
-   cd printf
+   cd holbertonschool-printf
+---
+   ## Compile
+   - gcc -Wall -Werror -Wextra -pedantic -std=c90 *.c -o printf_test
+---
+## 🚀 Usage
+
+To use `_printf` in your program:
+
+1. Include the header:
+   ```c
+   #include "main.h"
+int main(void)
+{
+    _printf("Hello %s! You are %d years old.\n", "Ali", 25);
+    return 0;
+}
+---
 
 ## 📝 Contributors
 
