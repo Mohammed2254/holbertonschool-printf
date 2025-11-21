@@ -54,54 +54,60 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 > All printing is done using `write(1, ...)` to ensure compliance with Holberton’s low-level restrictions.
 
 
-## 🔵 Flowchart of _printf Function (Text Representation)
+## Flowchart for _printf Function
+
+```mermaid
 graph TD
-    A[Start: _printf(format, ...)] --> B{format == NULL?};
+    A[Start: _printf(format, ...)] --> B{Initialize: i=0, count=0};
 
-    B -- Yes --> C[Return -1];
-    B -- No --> D[int i = 0, count = 0];
+    B --> C{format == NULL?};
 
-    D --> E[va_start(args, format)];
+    C -- Yes --> D[Return -1];
+    
+    C -- No --> E[va_start(args, format)];
 
     E --> F{format[i] != '\0'?};
 
-    F -- No --> J[va_end(args)];
-    J --> K[Return count];
+    F -- No --> G[va_end(args)];
+    G --> H[Return count];
 
-    F -- Yes --> G{format[i] == '%'};
+    F -- Yes --> I{format[i] == '%'};
 
-    G -- No --> H[count += _putchar(format[i])];
-    H --> I[i++];
-    I --> F;
+    %% Non-specifier character
+    I -- No --> J[count += _putchar(format[i])];
+    J --> K[i++];
+    K --> F;
+    
+    %% Handling '%'
+    I -- Yes --> L{format[i + 1] == '\0'?};
 
-    G -- Yes --> L{format[i + 1] == '\0'};
-
-    L -- Yes --> C;
-
+    L -- Yes --> D;
+    
     L -- No --> M[i++ (Skip '%')];
-
+    
+    %% Check specifier
     M --> N{format[i] == 'd' or 'i'};
-
+    
     N -- Yes --> O[count += print_int(args)];
     N -- No --> P{format[i] == 'c'};
-
-    O --> I;
+    
+    O --> K;
     
     P -- Yes --> Q[count += char_printing(args)];
     P -- No --> R{format[i] == '%'};
     
-    Q --> I;
+    Q --> K;
     
     R -- Yes --> S[count += percent_printing()];
     R -- No --> T{format[i] == 's'};
     
-    S --> I;
+    S --> K;
     
     T -- Yes --> U[count += string_printing(args)];
-    T -- No --> V[count += _putchar('%'); count += _putchar(format[i])];
+    T -- No --> V[Handle Unknown: count += _putchar('%'); count += _putchar(format[i])];
     
-    U --> I;
-    V --> I;
+    U --> K;
+    V --> K;
 
 ## 🚀 Usage
 
