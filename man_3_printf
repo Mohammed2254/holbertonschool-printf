@@ -98,5 +98,50 @@ Output:
 .br
 Name: Reem, Age: 21, Initial: R
 
+.PP
+6. Printing multiple strings:
+.br
+.B _printf("First: %s, Second: %s\n", "One", "Two");
+.br
+Output:
+.br
+First: One, Second: Two
+
+.PP
+7. Printing negative integers:
+.br
+.B _printf("Temperature: %d°C\n", -5);
+.br
+Output:
+.br
+Temperature: -5°C
+
+.PP
+8. Printing zero-padded numbers (not supported → shows raw):
+.br
+.B _printf("Value: %05d\n", 42);
+.br
+Output:
+.br
+Value: 42
+
+.PP
+9. Printing long strings:
+.br
+.B _printf("Message: %s\n", "This is a long test string!");
+.br
+Output:
+.br
+Message: This is a long test string!
+
+.PP
+10. Printing multiple characters:
+.br
+.B _printf("%c %c %c\n", 'A', 'B', 'C');
+.br
+Output:
+.br
+A B C
+
 .SH AUTHORS
 Written by Mohammed Abdullah Alabdali,Reem Abdulhadi Alshehri and Abdullah Manahi Almouraibd

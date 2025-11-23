@@ -54,42 +54,6 @@ This project demonstrates a deep understanding of **variadic functions**, **form
 > All printing is done using `write(1, ...)` to ensure compliance with Holberton’s low-level restrictions.
 
 
-## 🔵 Flowchart of _printf Function (Text Representation)
-
-Start  
-│  
-├── Is format NULL?  
-│       ├── Yes → Return -1  
-│       └── No  
-│  
-├── Initialize va_list args  
-├── Initialize count = 0, i = 0  
-│  
-├── Does format[i] exist?  
-│       ├── No → End va_list → Return count  
-│       └── Yes  
-│  
-├── Is format[i] '%' ?  
-│       ├── No → print format[i], update count → i++ → Loop  
-│       └── Yes  
-│  
-├── Does format[i + 1] exist?  
-│       ├── No → Invalid specifier → print '%', update count → i++  
-│       └── Yes  
-│  
-├── Is format[i + 1] a valid specifier? (c, s, d, i)  
-│       ├── Yes  
-│       │       ├── Handle %c → update count  
-│       │       ├── Handle %s → update count  
-│       │       ├── Handle %d / %i → update count  
-│       │       └── i += 2  
-│       └── No  
-│               ├── Invalid specifier → print '%' + format[i+1]  
-│               ├── Update count  
-│               └── i += 2  
-│  
-└── Loop until format string ends  
-
 ---
 
 ## 🚀 Usage
