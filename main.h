@@ -12,5 +12,5 @@ int _putchar(char c);
 
 int print_int(va_list args);
 int print_number(unsigned int num);
-
+int print_binary(unsigned int n);
 #endif/*MAIN_H*/

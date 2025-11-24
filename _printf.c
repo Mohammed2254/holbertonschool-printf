@@ -40,6 +40,8 @@ va_start(args, format);
 			count += percent_printing();
 		else if (format[i] == 's')
 			count += string_printing(args);
+		else if (format[i] == 'b')
+                        count += print_binary(va_arg(args, unsigned int));
 		else
 		{
 			count += _putchar('%');
